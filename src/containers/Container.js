@@ -7,24 +7,31 @@ class Container extends Component {
         this.state = {
             
             result: 0,
+            repaymentResults: 0
         };
-        this.handleFormSSubmit = this.handleFormSSubmit.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
     };
     handleFormSubmit(formData) {
         
         const updatedSalary = formData.salary + formData.salarySecond;
         const maxHouseValue = (updatedSalary * 3) + formData.deposit;
-        const finalValue = maxHouseValue - formData.commitmens;
+        const finalValue = maxHouseValue - formData.commitments;
+        const outstandingDebt = finalValue - formData.deposit;
+        const outstandingDebtDividedByTerm = outstandingDebt / formData.term;
+        const interestAmount = formData.interest / 100;
+        const yearPayment = (interestAmount * outstandingDebt) + outstandingDebtDividedByTerm;
+        const finalPayments = yearPayment / 12;
         this.setState({
-            result: finalValue,
+            results: finalValue,
+            repaymentResults: finalPayments
         });
     };
     render(){
         return(
-            <div>
+            <div className="calculator-container">
                 <h1>Mortgage Calculator</h1>
                 <Form onFormsSubmit={this.handleFormSSubmit} /> 
-                <Result results={this.state.results} />
+                <Result results={this.state.results} repaymentResults={this.state.repaymentResults}/>
             </div>
         );
     };
