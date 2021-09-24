@@ -5,18 +5,18 @@ class Container extends Component {
     constructor() {
         super();
         this.state = {
-            salary: 0,
+            
             result: 0,
         };
         this.handleFormSSubmit = this.handleFormSSubmit.bind(this);
     };
-    handleFormSSubmit(salary) {
-        salary.id = Date.now();
-        const updatedSalary = salary.salary;
-        const maxHouseValue = updatedSalary * 3;
+    handleFormSubmit(formData) {
+        
+        const updatedSalary = formData.salary + formData.salarySecond;
+        const maxHouseValue = (updatedSalary * 3) + formData.deposit;
+        const finalValue = maxHouseValue - formData.commitmens;
         this.setState({
-            salary: updatedSalary,
-            result: maxHouseValue
+            result: finalValue,
         });
     };
     render(){
