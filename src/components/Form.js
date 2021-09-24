@@ -6,10 +6,10 @@ class Form extends Component {
         this.state = {
             salary: 0,
             salarySecond: 0,
-            deposit : 0,
+            deposit: 0,
             commitments: 0,
             term: 0,
-            interest: 0,
+            interest: 0.00,
             showing: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -19,7 +19,7 @@ class Form extends Component {
         this.setState({
             [event.target.name]: event.target.value
         });
-    };
+    }
     handleSubmit(event) {
         event.preventDefault();
         const salary = parseInt(this.state.salary);
@@ -39,18 +39,17 @@ class Form extends Component {
             commitments,
             term,
             interest
-        });
+        })
 
         this.setState({
             salary: 0,
             salarySecond: 0,
-            deposit: 0 ,
+            deposit: 0,
             commitments: 0,
             term: 0,
             interest: 0.00
-
         });
-    };
+    }
     render() {
         const { showing } = this.state;
         return(

@@ -5,12 +5,11 @@ class Container extends Component {
     constructor() {
         super();
         this.state = {
-            
-            result: 0,
+            results: 0,
             repaymentResults: 0
         };
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    };
+    }
     handleFormSubmit(formData) {
         
         const updatedSalary = formData.salary + formData.salarySecond;
@@ -20,7 +19,7 @@ class Container extends Component {
         const outstandingDebtDividedByTerm = outstandingDebt / formData.term;
         const interestAmount = formData.interest / 100;
         const yearPayment = (interestAmount * outstandingDebt) + outstandingDebtDividedByTerm;
-        const finalPayments = yearPayment / 12;
+        const finalPayments = Math.round(yearPayment / 12); 
         this.setState({
             results: finalValue,
             repaymentResults: finalPayments
@@ -30,7 +29,7 @@ class Container extends Component {
         return(
             <div className="calculator-container">
                 <h1>Mortgage Calculator</h1>
-                <Form onFormsSubmit={this.handleFormSSubmit} /> 
+                <Form onFormSubmit={this.handleFormSubmit} /> 
                 <Result results={this.state.results} repaymentResults={this.state.repaymentResults}/>
             </div>
         );
